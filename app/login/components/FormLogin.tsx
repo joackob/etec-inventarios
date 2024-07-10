@@ -3,14 +3,20 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 
-export type FormCompletedEventProps = Readonly<{
+export type FormLoginCompletedEventProps = Readonly<{
   email: string;
   password: string;
 }>;
 
-export type FormCompletedEvent = (event: FormCompletedEventProps) => void;
+export type FormLoginCompletedEvent = (
+  event: FormLoginCompletedEventProps
+) => void;
 
-const FormLogin = ({ onCompleted }: { onCompleted: FormCompletedEvent }) => {
+const FormLogin = ({
+  onCompleted,
+}: {
+  onCompleted: FormLoginCompletedEvent;
+}) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const handleSubmit = () => {

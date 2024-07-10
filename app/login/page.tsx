@@ -1,9 +1,9 @@
 "use client";
 
-import FormLogin, { FormCompletedEvent } from "./components/FormLogin";
+import FormLogin, { FormLoginCompletedEvent } from "./components/FormLogin";
 
 const Page = () => {
-  const handleCompleted: FormCompletedEvent = (event) => {
+  const handleCompleted: FormLoginCompletedEvent = (event) => {
     console.log(event);
 
     return;
