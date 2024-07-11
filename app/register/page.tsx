@@ -1,23 +1,22 @@
 "use client";
 
-import FormRegister, {
-  FormRegisterCompletedEvent,
-} from "./components/FormRegister";
+import {
+  FeedbackAtErrorRegister,
+  FeedbackAtLoadRegister,
+  FormRegister,
+} from "./components";
+import { useRegister } from "./hooks";
 
-const page = () => {
-  const handleCompleted: FormRegisterCompletedEvent = async (event) => {
-    const res = await fetch("api/auth/sign-up", {
-      method: "POST",
-      body: JSON.stringify(event),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const res_json = await res.json();
-    console.log(res_json);
-  };
+const Page = () => {
+  const [statusRegister, tryRegister] = useRegister();
 
-  return <FormRegister onCompleted={handleCompleted} />;
+  return (
+    <>
+      <FeedbackAtErrorRegister error={statusRegister.error} />
+      <FeedbackAtLoadRegister isLoad={statusRegister.loading} />
+      <FormRegister onCompleted={tryRegister} />
+    </>
+  );
 };
 
-export default page;
+export default Page;

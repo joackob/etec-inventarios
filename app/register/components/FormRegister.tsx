@@ -2,18 +2,7 @@
 
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-
-export type FormRegisterCompletedEventProps = Readonly<{
-  name: string;
-  lastname: string;
-  email: string;
-  password: string;
-  passwordToConfirm: string;
-}>;
-
-export type FormRegisterCompletedEvent = (
-  event: FormRegisterCompletedEventProps
-) => void;
+import { FormRegisterCompletedEvent } from "./types";
 
 const FormRegister = ({
   onCompleted,
