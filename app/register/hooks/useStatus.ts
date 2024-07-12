@@ -1,18 +1,21 @@
 import { useState } from "react";
 
-export type Status = Readonly<{
-  error: string | null;
-  loading: boolean;
-  success: boolean;
-}>;
+export enum Status {
+  Error,
+  Loading,
+  Success,
+  Init,
+}
+
+export type MetaStatus = {
+  status: Status;
+  message?: string;
+};
 
 const useStatus = () => {
-  const [status, setStatus] = useState<Status>({
-    error: null,
-    loading: false,
-    success: false,
+  const [status, setStatus] = useState<MetaStatus>({
+    status: Status.Init,
   });
-
   return [status, setStatus] as const;
 };
 

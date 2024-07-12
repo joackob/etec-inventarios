@@ -1,7 +1,7 @@
 import { LinearProgress } from "@mui/material";
 
-const FeedbackAtLoadRegister = ({ isLoad }: { isLoad: boolean }) => {
-  return isLoad && <LinearProgress />;
+const FeedbackAtLoadRegister = ({ isLoading }: { isLoading: boolean }) => {
+  return isLoading && <LinearProgress />;
 };
 
 export default FeedbackAtLoadRegister;
