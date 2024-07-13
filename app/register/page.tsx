@@ -8,13 +8,13 @@ import {
 import { useRegister } from "./hooks";
 
 const Page = () => {
-  const [statusRegister, tryRegister] = useRegister();
+  const [status, register] = useRegister();
 
   return (
     <>
-      <FeedbackAtErrorRegister info={statusRegister} />
-      <FeedbackAtLoadRegister info={statusRegister} />
-      <FormRegister onCompleted={tryRegister} />
+      <FeedbackAtErrorRegister info={status} />
+      <FeedbackAtLoadRegister info={status} />
+      <FormRegister onCompleted={register} />
     </>
   );
 };

@@ -1,8 +1,8 @@
 import { LinearProgress } from "@mui/material";
-import { InfoStatus, Status } from "../hooks/useStatus";
+import { InfoAboutState, State } from "../hooks/useStatus";
 
-const FeedbackAtLoadRegister = ({ info }: { info: InfoStatus }) => {
-  const isLoading = info.status === Status.Loading;
+const FeedbackAtLoadRegister = ({ info }: { info: InfoAboutState }) => {
+  const isLoading = info.state === State.Loading;
   return isLoading && <LinearProgress />;
 };
 

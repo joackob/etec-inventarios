@@ -1,8 +1,10 @@
+import { AxiosResponse } from "axios";
+
 export type OnSuccessCallback = () => void;
 export type OnErrorCallback = (message: string) => void;
 
 export type ApiResultProps = {
-  res: Response;
+  res: Response | AxiosResponse;
   onSuccessCallback: OnSuccessCallback;
   onErrorCallback: OnErrorCallback;
 };
@@ -10,7 +12,7 @@ export type ApiResultProps = {
 export class ApiResult {
   props: ApiResultProps;
 
-  constructor(res: Response) {
+  constructor(res: Response | AxiosResponse) {
     this.props = {
       res,
       onErrorCallback: () => {},

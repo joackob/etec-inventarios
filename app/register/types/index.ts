@@ -1,12 +1,12 @@
 import type { User } from "@/app/types";
 
-export type FormRegisterCompletedEventProps =
+export type OnCompleteFormRegisterProps =
   | User
   | Readonly<{
       password: string;
       passwordToConfirm: string;
     }>;
 
-export type FormRegisterCompletedEvent = (
-  event: FormRegisterCompletedEventProps
+export type OnCompleteFormRegister = (
+  event: OnCompleteFormRegisterProps,
 ) => void;

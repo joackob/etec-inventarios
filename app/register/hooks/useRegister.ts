@@ -1,26 +1,29 @@
 import { useRouter } from "next/navigation";
-import { FormRegisterCompletedEventProps } from "../types";
+import { OnCompleteFormRegisterProps } from "../types";
 import { signUp } from "../api";
-import useStatus, { Status } from "./useStatus";
+import useStatus, { State } from "./useStatus";
+
+type UserToRegister = OnCompleteFormRegisterProps;
 
 const useRegister = () => {
   const [status, setStatus] = useStatus();
   const router = useRouter();
 
-  const tryRegister = async (user: FormRegisterCompletedEventProps) => {
-    setStatus({ status: Status.Loading });
-    const res = await signUp(user);
-    res
+  const registerNewUser = (user: UserToRegister) => {
+    const response = postNewUser(user);
+    response
+      .onLoading(() => {
+      setStatus({ state: State.Loading })}
       .onSuccess(() => {
         router.push("/login");
       })
       .onError((message) => {
-        setStatus({ status: Status.Error, message });
+        setStatus({ state: State.Error, message });
       })
       .apply();
   };
 
-  return [status, tryRegister] as const;
+  return [status, registerNewUser] as const;
 };
 
 export default useRegister;

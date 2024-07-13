@@ -2,12 +2,12 @@
 
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import { FormRegisterCompletedEvent } from "../types";
+import { OnCompleteFormRegister } from "../types";
 
 const FormRegister = ({
   onCompleted,
 }: {
-  onCompleted: FormRegisterCompletedEvent;
+  onCompleted: OnCompleteFormRegister;
 }) => {
   const nameRef = useRef<HTMLInputElement>(null);
   const lastnameRef = useRef<HTMLInputElement>(null);

@@ -1,8 +1,8 @@
 import { Alert } from "@mui/material";
-import { InfoStatus, Status } from "../hooks/useStatus";
+import { InfoAboutState, State } from "../hooks/useStatus";
 
-const FeedbackAtErrorRegister = ({ info }: { info: InfoStatus }) => {
-  const hasAProblem = info.status === Status.Error;
+const FeedbackAtErrorRegister = ({ info }: { info: InfoAboutState }) => {
+  const hasAProblem = info.state === State.Error;
   const problem = info.message ?? "Ups! Algo no salio bien";
   return hasAProblem && <Alert severity="error">{problem}</Alert>;
 };

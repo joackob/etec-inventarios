@@ -1,13 +1,4 @@
-import { User } from "@/app/types";
-import { ApiResult } from "./ApiResult";
-import axios, { AxiosRequestConfig, RawAxiosRequestHeaders } from "axios";
-
-export type SignUpProps =
-  | User
-  | Readonly<{
-      password: string;
-      passwordToConfirm: string;
-    }>;
+export type PostUserProps = OnFormRegisterCompletedEventProps;
 
 const config: AxiosRequestConfig = {
   headers: {
@@ -15,7 +6,7 @@ const config: AxiosRequestConfig = {
   },
 };
 
-export const signUp = async (user: SignUpProps) => {
+export const post = async (user: PostUserProps) => {
   try {
     const response = await axios.post("api/auth/sign-up", user, config);
     return new ApiResult(response);
