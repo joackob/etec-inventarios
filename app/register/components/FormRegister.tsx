@@ -2,7 +2,7 @@
 
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
-import { FormRegisterCompletedEvent } from "./types";
+import { FormRegisterCompletedEvent } from "../types";
 
 const FormRegister = ({
   onCompleted,

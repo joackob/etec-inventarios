@@ -7,13 +7,13 @@ export enum Status {
   Init,
 }
 
-export type MetaStatus = {
+export type InfoStatus = {
   status: Status;
   message?: string;
 };
 
 const useStatus = () => {
-  const [status, setStatus] = useState<MetaStatus>({
+  const [status, setStatus] = useState<InfoStatus>({
     status: Status.Init,
   });
   return [status, setStatus] as const;
