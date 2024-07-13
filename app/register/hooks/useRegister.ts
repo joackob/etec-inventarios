@@ -1,29 +1,25 @@
-import { useRouter } from "next/navigation";
 import { OnCompleteFormRegisterProps } from "../types";
-import { signUp } from "../api";
-import useStatus, { State } from "./useStatus";
+import { useStatus } from "./useStatus";
+import { useNavigation } from "./useNavigation";
+import { users } from "../api";
 
-type UserToRegister = OnCompleteFormRegisterProps;
+type RegisterProps = OnCompleteFormRegisterProps;
 
-const useRegister = () => {
-  const [status, setStatus] = useStatus();
-  const router = useRouter();
+export const useRegister = () => {
+  const { status, setLoading, setError, setSuccess } = useStatus();
+  const browser = useNavigation();
 
-  const registerNewUser = (user: UserToRegister) => {
-    const response = postNewUser(user);
-    response
-      .onLoading(() => {
-      setStatus({ state: State.Loading })}
-      .onSuccess(() => {
-        router.push("/login");
-      })
-      .onError((message) => {
-        setStatus({ state: State.Error, message });
-      })
-      .apply();
+  const toRegister = (user: RegisterProps) => {
+    users.post({
+      user,
+      onLoading: setLoading,
+      onError: setError,
+      onSuccess: () => {
+        setSuccess();
+        browser.toLogin();
+      },
+    });
   };
 
-  return [status, registerNewUser] as const;
+  return { status, toRegister } as const;
 };
-
-export default useRegister;

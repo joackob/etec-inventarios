@@ -1,33 +1,31 @@
 import { useState } from "react";
 
-export enum State {
+export enum Status {
   Error,
   Loading,
   Success,
   Init,
 }
 
-export type InfoAboutState = {
-  state: State;
+export type InfoAboutStatus = {
+  status: Status;
   information: string;
 };
 
-const useStatus = () => {
-  const [state, setState] = useState<InfoAboutState>({
-    state: State.Init,
-    information: "Inicializando...",
+export const useStatus = () => {
+  const [state, setState] = useState<InfoAboutStatus>({
+    status: Status.Init,
+    information: "Proceso iniciado",
   });
 
   const setLoading = () =>
-    setState({ state: State.Loading, information: "Carregando..." });
+    setState({ status: Status.Loading, information: "Procesando solicitud" });
 
   const setError = (message: string) =>
-    setState({ state: State.Error, information: message });
+    setState({ status: Status.Error, information: message });
 
-  const setSuccess = (message: string) =>
-    setState({ state: State.Success, information: message });
+  const setSuccess = () =>
+    setState({ status: Status.Success, information: "Solicitud aprobada" });
 
-  return [state, setLoading, setError, setSuccess] as const;
+  return { status: state, setLoading, setError, setSuccess } as const;
 };
-
-export default useStatus;
