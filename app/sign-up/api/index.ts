@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { OnCompleteFormRegisterProps } from "../types";
+import { OnCompleteSignUpFormProps } from "../types";
 
 const config: AxiosRequestConfig = {
   headers: {
@@ -12,7 +12,7 @@ type OnErrorCallback = (message: string) => void;
 type OnLoadingCallback = () => void;
 
 type PostUserProps = {
-  user: OnCompleteFormRegisterProps;
+  user: OnCompleteSignUpFormProps;
   onSuccess: OnSuccessCallback;
   onError: OnErrorCallback;
   onLoading: OnLoadingCallback;

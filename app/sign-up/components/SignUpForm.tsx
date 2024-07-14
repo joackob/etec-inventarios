@@ -8,16 +8,16 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { OnCompleteFormRegister, OnCompleteFormRegisterProps } from "../types";
+import { OnCompleteSignUpFormEvent, OnCompleteSignUpFormProps } from "../types";
 import { useForm } from "react-hook-form";
 
-const FormRegister = ({
+const SignUpForm = ({
   onCompleted,
 }: {
-  onCompleted: OnCompleteFormRegister;
+  onCompleted: OnCompleteSignUpFormEvent;
 }) => {
   const { register, handleSubmit, watch } =
-    useForm<OnCompleteFormRegisterProps>();
+    useForm<OnCompleteSignUpFormProps>();
 
   return (
     <Container maxWidth="xs">
@@ -31,10 +31,7 @@ const FormRegister = ({
         >
           registrate
         </Typography>
-        <Box
-          component={"form"}
-          onSubmit={handleSubmit((data) => onCompleted(data))}
-        >
+        <Box component={"form"} onSubmit={handleSubmit(onCompleted)}>
           <Stack spacing={"16px"}>
             <TextField
               type="text"
@@ -92,4 +89,4 @@ const FormRegister = ({
   );
 };
 
-export default FormRegister;
+export default SignUpForm;
