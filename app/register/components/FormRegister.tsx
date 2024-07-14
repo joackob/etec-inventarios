@@ -1,29 +1,23 @@
 "use client";
 
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
-import { useRef } from "react";
-import { OnCompleteFormRegister } from "../types";
+import {
+  Box,
+  Button,
+  Container,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { OnCompleteFormRegister, OnCompleteFormRegisterProps } from "../types";
+import { useForm } from "react-hook-form";
 
 const FormRegister = ({
   onCompleted,
 }: {
   onCompleted: OnCompleteFormRegister;
 }) => {
-  const nameRef = useRef<HTMLInputElement>(null);
-  const lastnameRef = useRef<HTMLInputElement>(null);
-  const emailRef = useRef<HTMLInputElement>(null);
-  const passwordRef = useRef<HTMLInputElement>(null);
-  const passwordToConfirmRef = useRef<HTMLInputElement>(null);
-
-  const handleSubmit = () => {
-    onCompleted({
-      name: nameRef.current?.value || "",
-      lastname: lastnameRef.current?.value || "",
-      email: emailRef.current?.value || "",
-      password: passwordRef.current?.value || "",
-      passwordToConfirm: passwordToConfirmRef.current?.value || "",
-    });
-  };
+  const { register, handleSubmit, watch } =
+    useForm<OnCompleteFormRegisterProps>();
 
   return (
     <Container maxWidth="xs">
@@ -37,46 +31,62 @@ const FormRegister = ({
         >
           registrate
         </Typography>
-        <Stack spacing={"16px"}>
-          <TextField
-            type="text"
-            variant="outlined"
-            id="name-field"
-            placeholder="Nombre"
-            inputRef={nameRef}
-          />
-          <TextField
-            type="text"
-            variant="outlined"
-            id="lastname-field"
-            placeholder="Apellido"
-            inputRef={lastnameRef}
-          />
-          <TextField
-            type="email"
-            variant="outlined"
-            id="email-field"
-            placeholder="Email"
-            inputRef={emailRef}
-          />
-          <TextField
-            type="password"
-            variant="outlined"
-            id="password-field"
-            placeholder="Contraseña"
-            inputRef={passwordRef}
-          />
-          <TextField
-            type="password"
-            variant="outlined"
-            id="password-to-confirm-field"
-            placeholder="Repetir contraseña"
-            inputRef={passwordToConfirmRef}
-          />
-          <Button variant="contained" onClick={handleSubmit}>
-            continuar
-          </Button>
-        </Stack>
+        <Box
+          component={"form"}
+          onSubmit={handleSubmit((data) => onCompleted(data))}
+        >
+          <Stack spacing={"16px"}>
+            <TextField
+              type="text"
+              variant="outlined"
+              id="name-field"
+              placeholder="Nombre"
+              required
+              {...register("name", { required: true })}
+            />
+            <TextField
+              type="text"
+              variant="outlined"
+              id="lastname-field"
+              placeholder="Apellido"
+              required
+              {...register("lastname", { required: true })}
+            />
+            <TextField
+              type="email"
+              variant="outlined"
+              id="email-field"
+              placeholder="Email"
+              required
+              {...register("email", { required: true })}
+            />
+            <TextField
+              type="password"
+              variant="outlined"
+              id="password-field"
+              placeholder="Contraseña"
+              required
+              {...register("password", { required: true })}
+            />
+            <TextField
+              type="password"
+              variant="outlined"
+              id="password-to-confirm-field"
+              placeholder="Repetir contraseña"
+              required
+              error={watch("password") !== watch("passwordToConfirm")}
+              helperText={
+                watch("password") !== watch("passwordToConfirm")
+                  ? "Las contraseñas no coinciden"
+                  : ""
+              }
+              {...register("passwordToConfirm", { required: true })}
+            />
+            <Button variant="contained" type="submit">
+              continuar
+            </Button>
+          </Stack>
+        </Box>
       </Stack>
     </Container>
   );
