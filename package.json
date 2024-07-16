@@ -28,6 +28,9 @@
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "prisma": "^5.16.2",
-    "typescript": "^5"
-  }
+    "typescript": "^5",
+    "@types/bun": "latest"
+  },
+  "module": "index.ts",
+  "type": "module"
 }

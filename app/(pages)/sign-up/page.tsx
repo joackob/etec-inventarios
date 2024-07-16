@@ -8,12 +8,12 @@ import {
 import { useSignUpProcess } from "./hooks";
 
 const Page = () => {
-  const { processStatus, signUp } = useSignUpProcess();
+  const { isError, isLoading, getInformation, signUp } = useSignUpProcess();
 
   return (
     <>
-      <SignUpProcessProgress status={processStatus} />
-      <SignUpProcessError status={processStatus} />
+      <SignUpProcessProgress isLoading={isLoading()} />
+      <SignUpProcessError hasAProblem={isError()} problem={getInformation()} />
       <SignUpForm onCompleted={signUp} />
     </>
   );

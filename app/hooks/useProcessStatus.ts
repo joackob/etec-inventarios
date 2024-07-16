@@ -33,5 +33,18 @@ export const useProcessStatus = () => {
       information: "Solicitud aprobada",
     });
 
-  return { processStatus, setLoading, setError, setSuccess } as const;
+  const getInformation = () => processStatus.information;
+  const isLoading = () => processStatus.status === Status.Loading;
+  const isError = () => processStatus.status === Status.Error;
+  const isSuccess = () => processStatus.status === Status.Success;
+
+  return {
+    setLoading,
+    setError,
+    setSuccess,
+    isLoading,
+    isError,
+    isSuccess,
+    getInformation,
+  } as const;
 };

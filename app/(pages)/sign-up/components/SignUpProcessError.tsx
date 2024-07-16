@@ -1,12 +1,13 @@
 import { Alert } from "@mui/material";
-import { ProcessStatus, Status } from "../../hooks/useProcessStatus";
+import { ProcessStatus, Status } from "@/app/hooks/useProcessStatus";
 
 const SignUpProcessError = ({
-  status: { status, information: problem },
+  hasAProblem,
+  problem,
 }: {
-  status: ProcessStatus;
+  hasAProblem: boolean;
+  problem: string;
 }) => {
-  const hasAProblem = status === Status.Error;
   return hasAProblem && <Alert severity="error">{problem}</Alert>;
 };
 
