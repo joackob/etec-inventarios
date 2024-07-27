@@ -1,22 +1,23 @@
-import { OnCompleteSignUpFormProps } from "../types";
+import { SignUpUserProps } from "../types";
 import { useProcessStatus } from "@/app/hooks";
 import { useBrowser } from "@/app/hooks";
-import { users } from "../api";
-
-type SignUpProps = OnCompleteSignUpFormProps;
+import { post } from "../api";
 
 export const useSignUpProcess = () => {
   const process = useProcessStatus();
   const browser = useBrowser();
 
-  const signUp = (user: SignUpProps) => {
-    users.post({
-      user,
-      onLoading: process.setLoading,
-      onError: process.setError,
-      onSuccess: () => {
+  const signUp = (user: SignUpUserProps) => {
+    post(user, {
+      initPost() {
+        process.setLoading();
+      },
+      endPostWithSuccess() {
         process.setSuccess();
         browser.toSignInPage();
+      },
+      endPostWithProblems(error) {
+        process.setError(error);
       },
     });
   };

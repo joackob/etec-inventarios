@@ -1,5 +1,7 @@
 import type { User } from "@/app/types";
 
+export type SignUpUserProps = Readonly<OnCompleteSignUpFormEvent>;
+
 export type OnCompleteSignUpFormProps =
   | User
   | Readonly<{
