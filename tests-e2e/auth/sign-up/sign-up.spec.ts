@@ -17,4 +17,17 @@ test.describe("Como usuario, quiero incribirme en el sistema para obtener una cu
     await page.getByRole("button", { name: "continuar" }).click();
     await expect(page).toHaveURL("http://localhost:3000/auth/sign-in");
   });
+
+  test("Exponer alerta en caso de que la contraseña y su confirmación no coincidan", async ({
+    page,
+  }) => {
+    await page.goto("http://localhost:3000/auth/sign-up");
+    const alert = page.getByText("Las contraseñas no coinciden");
+    await expect(alert).not.toBeVisible();
+    await page.getByPlaceholder("Contraseña", { exact: true }).click();
+    await page.getByPlaceholder("Contraseña", { exact: true }).fill("123");
+    await page.getByPlaceholder("Repetir contraseña").click();
+    await page.getByPlaceholder("Repetir contraseña").fill("1234");
+    await expect(alert).toBeVisible();
+  });
 });
