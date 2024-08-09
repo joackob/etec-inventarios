@@ -1,8 +1,12 @@
 import { test, expect } from "@playwright/test";
+
 test.describe("Como usuario, quiero incribirme en el sistema para obtener una cuenta particular", () => {
   test("Si se rellenan adecuadamente, todos los campos requeridos, el sistema me redirige sing-in", async ({
     page,
   }) => {
+    await page.route("*/**/api/auth/sign-up", async (route) => {
+      await route.fulfill({ status: 201 });
+    });
     await page.goto("http://localhost:3000/auth/sign-up");
     await page.getByPlaceholder("Nombre").click();
     await page.getByPlaceholder("Nombre").fill("Jhon");
