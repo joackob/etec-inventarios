@@ -6,31 +6,25 @@ import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
+import { Stack } from "@mui/material";
 
-export default function ActionAreaCard() {
+export default function TarjetaParaSolicitudEntrante() {
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        {
-          // fijarse como funciona exactamente este componente
-        }
-        <Avatar>
-          {" "}
-          {
-            //aca tiene que ir la imagen del mail
-          }{" "}
-        </Avatar>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Solicitud entrante
-          </Typography>
-          <Typography variant="body2" sx={{ color: "text.secondary" }}>
-            {
-              //aca va texto
-            }
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
+    <Stack direction={"row"} spacing={"16px"} padding={"16px"} alignItems={"center"}>
+      <Avatar style={{ backgroundColor: "#03045E", color: "#FAFDFD" }}>
+        <Typography style={{ fontFamily: "Roboto", fontSize: "16px", fontWeight: 600 }}>
+          PG
+        </Typography>
+      </Avatar>
+      <Box>
+        <Typography gutterBottom component="h5" style={{ color: "#000000", fontFamily: "Roboto", fontSize: "16px", fontWeight: 600 }} >
+          Solicitud entrante
+        </Typography>
+        <Typography component="p" style={{ color: "#000000", fontFamily: "Roboto", fontSize: "14px", fontWeight: 400 }} >
+          Pamela Gionco hizo un pedido y fue aprobado por Jose Albornoz
+        </Typography>
+      </Box>
+    </Stack>
+
   );
 }

@@ -1,14 +1,21 @@
 "use client";
 
 import React from "react";
-import ActionAreaCard from "./componentes/card";
+import TarjetaParaSolicitudEntrante from "./componentes/card";
+import { Paper, Stack, Typography } from "@mui/material";
 
 const Page = () => {
   return (
-    <div>
-      <h1>Novedades</h1>
-      <ActionAreaCard />
-    </div>
+    <Paper elevation={8} style={{ backgroundColor: "#FFFFFF", padding: "16px 8px", margin: "10px", borderRadius: "8px" }}>
+      <Stack spacing={"16px"} sx={{ boxShadow: "0px 0px 0px 0px " }}>
+
+        <Typography style={{ color: "#000000", fontFamily: "Roboto", fontSize: "16px", fontWeight: 600 }}>Novedades</Typography>
+        <Stack spacing={"8px"}>
+          <TarjetaParaSolicitudEntrante />
+          <TarjetaParaSolicitudEntrante />
+        </Stack>
+      </Stack>
+    </Paper>
   );
 };
 
