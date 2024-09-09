@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { Button, Container, Paper, Stack, TextField, Typography } from "@mui/material";
 import { useRef } from "react";
 
 export type FormLoginCompletedEventProps = Readonly<{
@@ -27,8 +27,8 @@ const FormLogin = ({
   };
 
   return (
-    <Container maxWidth="xs">
-      <Stack marginTop={"20vh"} spacing={"24px"}>
+    <Paper elevation={10} >
+      <Stack marginTop={"20vh"} spacing={"24px"} bgcolor={"#FAFDFD"} borderRadius={"8"} padding={"16px"} marginBottom={"20vh"}>
         <Typography
           variant="h5"
           sx={{
@@ -57,8 +57,9 @@ const FormLogin = ({
             continuar
           </Button>
         </Stack>
+
       </Stack>
-    </Container>
+    </Paper>
   );
 };
 
