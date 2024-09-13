@@ -11,11 +11,65 @@ datasource db {
 }
 
 model Users {
-  id String @id @default(uuid())
+  id          String        @id @default(uuid())
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  name        String
+  lastname    String
+  email       String        @unique
+  password    String
+  active      Boolean
+  solicitudes Solicitudes[]
+}
+
+model Notificaciones {
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  name String 
-  lastname String 
-  email String @unique
-  password String 
+
+  solicitud Solicitudes?
+}
+
+model Items {
+  id                 String           @id @default(uuid())
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  nombre             String
+  marca              String
+  numero_serie       Int
+  itemUbicacion      ItemsEnUbicacion @relation(fields: [itemsEnUbicacionId], references: [id])
+  solicitud          Solicitudes      @relation(fields: [solicitudId], references: [id])
+  solicitudId        String
+  itemsEnUbicacionId String
+}
+
+model ItemsEnUbicacion {
+  id           String      @id @default(uuid())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
+  ubicacion_id String
+  cantidad     Int
+  item         Items?      @relation(fields: [itemId], references: [id])
+  itemId       String      @unique
+  ubicacion    Ubicaciones @relation(fields: [ubicacion_id], references: [id])
+}
+
+model Ubicaciones {
+  id             String             @id @default(uuid())
+  createdAt      DateTime           @default(now())
+  updatedAt      DateTime           @updatedAt
+  sector         String
+  tipo_ubicacion String
+  items          ItemsEnUbicacion[]
+}
+
+model Solicitudes {
+  id             String          @id @default(uuid())
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  notificacion   Notificaciones? @relation(fields: [notificacionId], references: [id])
+  notificacionId String          @unique
+  items          Items[]
+  solicitante    Users           @relation(fields: [solicitanteId], references: [id])
+  solicitanteId  String
 }

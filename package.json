@@ -9,7 +9,8 @@
     "tests:e2e": "bun run build && bunx playwright test",
     "tests": "bunx playwright test",
     "create:scene": "bunx playwright codegen",
-    "lint": "next lint"
+    "lint": "next lint",
+    "init": "bunx prisma migrate dev --name init"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",

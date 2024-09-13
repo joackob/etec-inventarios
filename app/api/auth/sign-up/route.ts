@@ -1,7 +1,6 @@
-const POST = async (req: Request) => {
-  const data = await req.json();
-  console.log(data);
-  return new Response(data, { status: 201 });
+const GET = async (req: Request) => {
+  console.log("estoy en el servidor")
+  return Response.json({ mensaje: "hola mundo" }, { status: 200 });
 };
 
-export { POST };
+export { GET };

@@ -1,10 +1,11 @@
-"use client";
 
 import React from "react";
 import TarjetaParaSolicitudEntrante from "./componentes/card";
 import { Paper, Stack, Typography } from "@mui/material";
+import db from "@/db"
 
-const Page = () => {
+const Page = async () => {
+  const notificaciones = await db.notificaciones.findMany({})
   return (
     <Paper elevation={8} style={{ backgroundColor: "#FFFFFF", padding: "16px 8px", margin: "10px", borderRadius: "8px" }}>
       <Stack spacing={"16px"} sx={{ boxShadow: "0px 0px 0px 0px " }}>
