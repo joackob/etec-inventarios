@@ -18,58 +18,72 @@ model Users {
   lastname    String
   email       String        @unique
   password    String
-  active      Boolean
+  active      Boolean       @default(true)
+  // hay que definir los roles que puede tener un usuario
+  // pero más adelnate
+  // role      String        @default("user")
   solicitudes Solicitudes[]
 }
 
-model Notificaciones {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  solicitud Solicitudes?
+model Solicitudes {
+  id            String   @id @default(uuid())
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  items         Items[]
+  // notificacion   Notificaciones? @relation(fields: [notificacionId], references: [id])
+  // notificacionId String          @unique
+  solicitante   Users    @relation(fields: [solicitanteId], references: [id])
+  solicitanteId String
 }
 
 model Items {
-  id                 String           @id @default(uuid())
-  createdAt          DateTime         @default(now())
-  updatedAt          DateTime         @updatedAt
-  nombre             String
-  marca              String
-  numero_serie       Int
-  itemUbicacion      ItemsEnUbicacion @relation(fields: [itemsEnUbicacionId], references: [id])
-  solicitud          Solicitudes      @relation(fields: [solicitudId], references: [id])
-  solicitudId        String
-  itemsEnUbicacionId String
-}
-
-model ItemsEnUbicacion {
-  id           String      @id @default(uuid())
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
-  ubicacion_id String
-  cantidad     Int
-  item         Items?      @relation(fields: [itemId], references: [id])
-  itemId       String      @unique
-  ubicacion    Ubicaciones @relation(fields: [ubicacion_id], references: [id])
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  nombre      String
+  marca       String
+  serie       String
+  // itemUbicacion      ItemsEnUbicacion @relation(fields: [itemsEnUbicacionId], references: [id])
+  // itemsEnUbicacionId String
+  ubicacion   Ubicaciones @relation(fields: [ubicacionId], references: [id])
+  ubicacionId String
+  solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
+  solicitudId String
 }
 
 model Ubicaciones {
-  id             String             @id @default(uuid())
-  createdAt      DateTime           @default(now())
-  updatedAt      DateTime           @updatedAt
-  sector         String
-  tipo_ubicacion String
-  items          ItemsEnUbicacion[]
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  items     Items[]
+  // Para los dotos siguientes, se deben crear las tablas correspondientes 
+  // sector         String
+  // En particular, este tipo de dato se puede derivar en un enum
+  // https://www.prisma.io/docs/orm/prisma-schema/data-model/models#defining-enums
+  // tipoDeUbicacion String
 }
 
-model Solicitudes {
-  id             String          @id @default(uuid())
-  createdAt      DateTime        @default(now())
-  updatedAt      DateTime        @updatedAt
-  notificacion   Notificaciones? @relation(fields: [notificacionId], references: [id])
-  notificacionId String          @unique
-  items          Items[]
-  solicitante    Users           @relation(fields: [solicitanteId], references: [id])
-  solicitanteId  String
-}
+// Las notificionaciones no se almacenan en la base de datos
+// Se pueden derivar a partir de las solicitudes
+// y su visibilidad por parte de los usuarios puede almacenarse en la 
+// local storage del navegador
+//
+// model Notificaciones {
+//   id        String       @id @default(uuid())
+//   createdAt DateTime     @default(now())
+//   updatedAt DateTime     @updatedAt
+//   solicitud Solicitudes?
+// }
+
+// Hasta que no se justifique la razon de esta tabla
+// queda comentada para evitar la creacion de tablas innecesarias
+// Consultar con las personas que esten a cargo cual era su proposito
+//
+// model ItemsEnUbicacion {
+//   id        String      @id @default(uuid())
+//   createdAt DateTime    @default(now())
+//   updatedAt DateTime    @updatedAt
+//   cantidad  Int
+//   item      Items
+//   ubicacion Ubicaciones 
+// }
