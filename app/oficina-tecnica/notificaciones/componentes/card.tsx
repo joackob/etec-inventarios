@@ -8,12 +8,12 @@ import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Stack } from "@mui/material";
 
-export default function TarjetaParaSolicitudEntrante() {
+export default function TarjetaParaSolicitudEntrante({ iniciales, solicitante }: { iniciales: string, solicitante: string }) {
   return (
     <Stack direction={"row"} spacing={"16px"} padding={"16px"} alignItems={"center"}>
       <Avatar style={{ backgroundColor: "#03045E", color: "#FAFDFD" }}>
         <Typography style={{ fontFamily: "Roboto", fontSize: "16px", fontWeight: 600 }}>
-          PG
+          {iniciales}
         </Typography>
       </Avatar>
       <Box>
@@ -21,7 +21,7 @@ export default function TarjetaParaSolicitudEntrante() {
           Solicitud entrante
         </Typography>
         <Typography component="p" style={{ color: "#000000", fontFamily: "Roboto", fontSize: "14px", fontWeight: 400 }} >
-          Pamela Gionco hizo un pedido y fue aprobado por Jose Albornoz
+          {solicitante} hizo un pedido
         </Typography>
       </Box>
     </Stack>

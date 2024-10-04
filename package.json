@@ -10,7 +10,8 @@
     "tests": "bunx playwright test",
     "create:scene": "bunx playwright codegen",
     "lint": "next lint",
-    "init": "bunx prisma migrate dev --name init"
+    "init": "bunx prisma migrate dev --name init",
+    "init:npm": "npx prisma migrate dev --name init"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
