@@ -8,7 +8,7 @@ export async function GET() {
                 solicitante: { select: { name: true, lastname: true } },
             }
         });
-        return new Response(JSON.stringify(solicitudes), {
+        return Response.json({ notificaciones: solicitudes }, {
             status: 200,
             headers: {
                 "Content-Type": "application/json"
