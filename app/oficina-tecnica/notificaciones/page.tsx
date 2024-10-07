@@ -1,12 +1,13 @@
+"use client";
 import React from "react";
 import TarjetaParaSolicitudEntrante from "./componentes/card";
 import { Paper, Stack, Typography } from "@mui/material";
 import db from "@/db";
 import axios from "axios";
 
-const Page = async () => {
-  const response = await axios.get("localhost:3000/api/notificaciones");
-  const { notificaciones } = response.data;
+const Page = () => {
+  // const response = await axios.get("http://localhost:3000/api/notificaciones");
+  // const { notificaciones } = response.data;
 
   return (
     <Paper
@@ -30,13 +31,14 @@ const Page = async () => {
           Novedades
         </Typography>
         <Stack spacing={"8px"}>
-          {notificaciones.map(
+          {/* {notificaciones.map(
             (notificacion: {
               id: string;
               solicitante: { name: string; lastname: string };
             }) => {
               return (
                 <TarjetaParaSolicitudEntrante
+                  key={notificacion.id}
                   iniciales={
                     notificacion.solicitante.name[0] +
                     notificacion.solicitante.lastname[0]
@@ -49,7 +51,7 @@ const Page = async () => {
                 />
               );
             }
-          )}
+          )} */}
         </Stack>
       </Stack>
     </Paper>
