@@ -1,4 +1,8 @@
 name: Playwright Tests
+env:
+  DATABASE_URL: file:test.db
+  JWT_SECRET: jwt_secret
+  CI: ON
 on:
   push:
     branches: [main]

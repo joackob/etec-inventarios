@@ -1,13 +1,9 @@
-"use client";
-import React from "react";
-import TarjetaParaSolicitudEntrante from "./componentes/card";
 import { Paper, Stack, Typography } from "@mui/material";
-import db from "@/db";
-import axios from "axios";
+import TarjetaParaSolicitudEntrante from "./componentes/tarjeta-para-solicitud-entrante";
+import { obtenerNotificaciones } from "./repo";
 
-const Page = () => {
-  // const response = await axios.get("http://localhost:3000/api/notificaciones");
-  // const { notificaciones } = response.data;
+const Page = async () => {
+  const notificaciones = await obtenerNotificaciones();
 
   return (
     <Paper
@@ -31,27 +27,22 @@ const Page = () => {
           Novedades
         </Typography>
         <Stack spacing={"8px"}>
-          {/* {notificaciones.map(
-            (notificacion: {
-              id: string;
-              solicitante: { name: string; lastname: string };
-            }) => {
-              return (
-                <TarjetaParaSolicitudEntrante
-                  key={notificacion.id}
-                  iniciales={
-                    notificacion.solicitante.name[0] +
-                    notificacion.solicitante.lastname[0]
-                  }
-                  solicitante={
-                    notificacion.solicitante.name +
-                    " " +
-                    notificacion.solicitante.lastname
-                  }
-                />
-              );
-            }
-          )} */}
+          {notificaciones.map((notificacion) => {
+            return (
+              <TarjetaParaSolicitudEntrante
+                key={notificacion.id}
+                iniciales={
+                  notificacion.solicitante.nombre[0] +
+                  notificacion.solicitante.apellido[0]
+                }
+                solicitante={
+                  notificacion.solicitante.nombre +
+                  " " +
+                  notificacion.solicitante.apellido
+                }
+              />
+            );
+          })}
         </Stack>
       </Stack>
     </Paper>

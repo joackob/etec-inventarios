@@ -5,22 +5,28 @@ export default defineConfig({
   // testDir: "tests-e2e",
   //
   // Glob patterns or regular expressions that match test files.
-  testMatch: "*tests/*.spec.ts",
+  testMatch: "./tests/*.spec.ts",
 
   // Run all tests in parallel.
   fullyParallel: true,
 
   // Fail the build on CI if you accidentally left test.only in the source code.
-  forbidOnly: !!process.env.CI,
+  forbidOnly: !!(process.env.CI === "ON"),
 
   // Retry on CI only.
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI === "ON" ? 2 : 0,
 
   // Opt out of parallel tests on CI.
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI === "ON" ? 1 : undefined,
 
   // Reporter to use
   reporter: "html",
+
+  // Global setup for all tests.
+  globalSetup: "./tests/utils/global.setup.ts",
+
+  // Global teardown for all tests.
+  globalTeardown: "./tests/utils/global.teardown.ts",
 
   use: {
     // Base URL to use in actions like `await page.goto('/')`.
@@ -38,8 +44,8 @@ export default defineConfig({
   ],
   // Run your local dev server before starting the tests.
   webServer: {
-    command: "bun run start",
+    command: "bun run dev",
     url: "http://localhost:3000",
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: !(process.env.CI === "ON"),
   },
 });
