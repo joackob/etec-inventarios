@@ -3,13 +3,16 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Theme from "@/app/theme";
 import { Container } from "@mui/material";
-import '@fontsource/roboto/300.css'
-import '@fontsource/roboto/400.css'
-import '@fontsource/roboto/500.css'
-import '@fontsource/roboto/700.css'
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import "@fontsource/roboto-condensed/300.css";
+import "@fontsource/roboto-condensed/400.css";
+import "@fontsource/roboto-condensed/500.css";
+import "@fontsource/roboto-condensed/700.css";
 
 const inter = Inter({ subsets: ["latin"] });
-
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +28,7 @@ export default function RootLayout({
     <Theme>
       <html lang="en">
         <body className={inter.className}>
-          <Container maxWidth={"xs"}>
-            {children}
-          </Container>
+          <Container maxWidth={"xs"}>{children}</Container>
         </body>
       </html>
     </Theme>
