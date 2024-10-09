@@ -4,7 +4,9 @@ import React, { ReactNode } from "react";
 
 const themeOptions: ThemeOptions = {
   palette: {
-    mode: "light",
+    primary: {
+      main: "#0077B6",
+    },
   },
 };
 const defaultTheme = createTheme(themeOptions);

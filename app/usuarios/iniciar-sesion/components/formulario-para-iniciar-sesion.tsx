@@ -1,8 +1,15 @@
-import { TextField, Button, Stack } from "@mui/material";
+"use client";
+import { TextField, Button, Stack, Alert } from "@mui/material";
+import { intentarIniciarLaSesionDeUnUsuario } from "../actions";
+import { useFormState } from "react-dom";
 
 export const FormularioParaIniciarSesion = () => {
+  const [mensaje, dispatch] = useFormState(
+    intentarIniciarLaSesionDeUnUsuario,
+    undefined,
+  );
   return (
-    <Stack component={"form"} spacing={"24px"}>
+    <Stack component={"form"} spacing={"24px"} action={dispatch}>
       <TextField
         type="email"
         variant="standard"
@@ -17,9 +24,10 @@ export const FormularioParaIniciarSesion = () => {
         name="password"
         placeholder="Contraseña"
       />
-      <Button style={{ backgroundColor: "#0077B6" }} variant="contained">
+      <Button type="submit" variant="contained">
         continuar
       </Button>
+      {mensaje && <Alert severity="error">{mensaje}</Alert>}
     </Stack>
   );
 };
