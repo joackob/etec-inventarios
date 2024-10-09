@@ -1,3 +1,4 @@
+import { ErrorDesconocidoDelServidor } from "@/app/excepciones";
 import { SignJWT } from "jose";
 
 const secret = process.env.JWT_SECRET ?? "secret";
@@ -13,6 +14,6 @@ export const encriptarIDDeUsuario = async (id: string): Promise<string> => {
     signJWT.setExpirationTime("1h");
     return await signJWT.sign(secretKey);
   } catch (error) {
-    throw new Error("Error al crear credenciales");
+    throw new ErrorDesconocidoDelServidor("Error al crear credenciales");
   }
 };

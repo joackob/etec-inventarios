@@ -1,27 +1,25 @@
+import { SolicitudMalPlanteada } from "@/app/excepciones";
 import z, { ZodError } from "zod";
 
 export const validarLosDatosDeLaSolicitud = (
-  solicitud: FormData
+  solicitud: any,
 ): DatosNecesariosParaIniciarLaSesionDeUnUsuario => {
   return chequearEsquemaDeLaSolicitud(solicitud);
 };
 
 const chequearEsquemaDeLaSolicitud = (
-  datos: FormData
+  solicitud: any,
 ): DatosNecesariosParaIniciarLaSesionDeUnUsuario => {
   try {
-    return EsquemaDeUnaSolicitudParaIniciarLaSesionDeUnUsuario.parse({
-      email: datos.get("email"),
-      password: datos.get("password"),
-    });
+    return EsquemaDeUnaSolicitudParaIniciarLaSesionDeUnUsuario.parse(solicitud);
   } catch (error) {
     const primerErrorEncontrado = (error as ZodError).issues.at(0);
-    throw new Error(
+    throw new SolicitudMalPlanteada(
       `El campo ${primerErrorEncontrado?.path.at(
-        0
+        0,
       )} no se encuentra en el formato correcto: ${
         primerErrorEncontrado?.message
-      }`
+      }`,
     );
   }
 };
@@ -38,7 +36,7 @@ export const EsquemaDeUnaSolicitudParaIniciarLaSesionDeUnUsuario = z.object(
   {
     message:
       "La petición no contiene ninguno de los datos necesarios para ser procesado",
-  }
+  },
 );
 
 export type DatosNecesariosParaIniciarLaSesionDeUnUsuario = z.infer<

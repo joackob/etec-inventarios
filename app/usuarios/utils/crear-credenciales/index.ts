@@ -6,7 +6,7 @@ export type CredencialesParaLaSesionDeUnUsuario = {
 };
 
 export const crearCreadencialesParaSuSesion = async (
-  user: Usuarios
+  user: Usuarios,
 ): Promise<CredencialesParaLaSesionDeUnUsuario> => {
   const token = await encriptarIDDeUsuario(user.id);
   return {

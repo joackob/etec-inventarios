@@ -2,9 +2,13 @@ import bcrypt from "bcrypt";
 import { Usuarios } from "@prisma/client";
 import { DatosNecesariosParaIniciarLaSesionDeUnUsuario } from "../iniciar-sesion/parser";
 import { encontrarAUnUsuarioPorSuEmail } from "./repo";
+import {
+  ServicioInhabilitado,
+  SolicitudSinCredencialesCorrespondientes,
+} from "@/app/excepciones";
 
 export const autenticarLosDatosDeUnUsuario = async (
-  datos: DatosNecesariosParaIniciarLaSesionDeUnUsuario
+  datos: DatosNecesariosParaIniciarLaSesionDeUnUsuario,
 ): Promise<Usuarios> => {
   const usuario = await encontrarAUnUsuarioPorSuEmail(datos.email);
   await chequearContrasenas({
@@ -24,14 +28,16 @@ const chequearContrasenas = async ({
   try {
     const lasContraseniasCoinciden = await bcrypt.compare(
       contrasenaDeLaSolicitud,
-      contrasenaDelUsuario
+      contrasenaDelUsuario,
     );
     if (!lasContraseniasCoinciden) {
-      throw new Error("Usuario o contraseña incorrectos");
+      throw new SolicitudSinCredencialesCorrespondientes(
+        "Usuario o contraseña incorrectos",
+      );
     }
   } catch (error) {
-    throw new Error(
-      "El servicio para el chequeo de la password no se encuentra disponible"
+    throw new ServicioInhabilitado(
+      "El servicio para el chequeo de la password no se encuentra disponible",
     );
   }
 };
