@@ -7,8 +7,9 @@
     "build": "next build",
     "start": "next start",
     "tests:e2e": "bun run build && bunx playwright test",
+    "tests:e2e:without-build": "bunx playwright test",
     "tests": "bunx playwright test",
-    "create:scene": "bunx playwright codegen",
+    "create:test:e2e": "bunx playwright codegen",
     "lint": "next lint",
     "init": "bunx prisma migrate dev --name init",
     "init:npm": "npx prisma migrate dev --name init"

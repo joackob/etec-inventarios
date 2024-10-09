@@ -38,9 +38,9 @@ export class SolicitudSinCredencialesCorrespondientes extends Excepcion {
 }
 
 export class UsuarioNoRegistrado extends Excepcion {
-  constructor(mensaje: string) {
+  constructor() {
     super({
-      mensaje: mensaje,
+      mensaje: "El email o la contraseña ingresada no son correctos",
     });
   }
 }
