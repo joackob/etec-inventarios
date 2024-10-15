@@ -10,6 +10,8 @@ import { Paper, Stack } from "@mui/material";
 import shadows from "@mui/material/styles/shadows";
 import Button from "@mui/material";
 import SendIcon, { Height } from "@mui/icons-material";
+import { LogoETEC } from "@/app/components/logo-etec";
+import { url } from "inspector";
 
 export default function TarjetaParaSolicitudEntrante() {
   return (
@@ -26,6 +28,7 @@ export default function TarjetaParaSolicitudEntrante() {
           >
             {/* <img src="" alt="" /> */}
           </Stack>
+          <LogoETEC></LogoETEC>
         </Paper>
         <Paper>
           <Stack
@@ -194,6 +197,9 @@ export default function TarjetaParaSolicitudEntrante() {
                   2 unidades
                 </Typography>
               </Typography>
+              <button style={{ height: "32px" }}>
+                agregar al carrito de compras
+              </button>
             </Box>
           </Stack>
         </Paper>
