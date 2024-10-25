@@ -16,7 +16,7 @@ export const useSesion = () => {
   const describirElProblema = () => mensaje ?? "";
 
   return {
-    iniciar: dispatch,
+    enviarSolicitud: dispatch,
     huboUnProblema,
     estaEnProceso,
     describirElProblema,
