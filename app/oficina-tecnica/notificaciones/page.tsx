@@ -3,16 +3,8 @@ import TarjetaParaSolicitudEntrante from "./componentes/tarjeta-para-solicitud-e
 import { obtenerNotificaciones } from "./repo";
 
 const Page = async () => {
-  //const notificaciones = await obtenerNotificaciones();
-  const notificaciones = [
-    {
-      id: "1",
-      solicitante: {
-        nombre: "pamela",
-        apellido: "gionco",
-      },
-    },
-  ];
+  const notificaciones = await obtenerNotificaciones();
+
   return (
     <Paper
       elevation={8}

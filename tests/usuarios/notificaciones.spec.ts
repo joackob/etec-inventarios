@@ -7,6 +7,6 @@ test.describe("como representante de O.T quiero recibir todas las notificaciones
     await expect(
       page.getByRole("heading", { name: "Solicitud entrante" })
     ).toBeVisible();
-    await expect(page.getByText("pamela gionco hizo un pedido")).toBeVisible();
+    await expect(page.getByText("Pamela Gionco hizo un pedido")).toBeVisible();
   });
 });

@@ -23,16 +23,16 @@ model Usuarios {
 }
 
 model Solicitudes {
-  id            String            @id @default(uuid())
-  createdAt     DateTime          @default(now())
-  updatedAt     DateTime          @updatedAt
-  items         ItemsEnSolcitud[]
-  solicitante   Usuarios          @relation(fields: [solicitanteId], references: [id])
+  id            String             @id @default(uuid())
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  items         ItemsEnSolicitud[]
+  solicitante   Usuarios           @relation(fields: [solicitanteId], references: [id])
   solicitanteId String
   estado        String // enum[pendiente, activo, cerrado]
 }
 
-model ItemsEnSolcitud {
+model ItemsEnSolicitud {
   solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
   solicitudId String
   item        Items       @relation(fields: [itemId], references: [id])
@@ -43,16 +43,16 @@ model ItemsEnSolcitud {
 }
 
 model Items {
-  id              String            @id @default(uuid())
-  createdAt       DateTime          @default(now())
-  updatedAt       DateTime          @updatedAt
+  id              String             @id @default(uuid())
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
   descripcion     String
   marca           String
-  serie           String            @unique
-  ubicacion       Ubicaciones       @relation(fields: [ubicacionId], references: [id])
+  serie           String             @unique
+  ubicacion       Ubicaciones        @relation(fields: [ubicacionId], references: [id])
   ubicacionId     String
   unidad          String
-  ItemsEnSolcitud ItemsEnSolcitud[]
+  ItemsEnSolcitud ItemsEnSolicitud[]
 }
 
 model Ubicaciones {
@@ -62,8 +62,8 @@ model Ubicaciones {
   tipo       String // enum[deposito, entorno]
   piso       String // enum[planta baja, primer piso]
   peine      String // enum[1, 2, 3, 1-2, 2-3]
-  nombre     String // enum[101, 102, 103, ..., ODS]
-  estanteria String // enum[ estanteria 1, estanteria 2, ..., estanteria 10] solo para depositos
-  almacen    String // enum[almacen 1, almacen 2, ..., almacen 10] solo para depositos
+  nombre     String   @unique // enum[101, 102, 103, ..., ODS]
+  estanteria String? // enum[ estanteria 1, estanteria 2, ..., estanteria 10] solo para depositos
+  almacen    String? // enum[almacen 1, almacen 2, ..., almacen 10] solo para depositos
   items      Items[]
 }
