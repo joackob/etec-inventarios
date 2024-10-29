@@ -5,7 +5,9 @@ import TarjetaParaEquipoSinExistencias from "./componentes/tarjeta-para-equipo-s
 import TarjetaParaLogoEtec from "./componentes/tarjeta-logoetec";
 import ContenedorParaLaSolicitud from "./componentes/contenedor-para-la-solicitud";
 
-export default function Page() {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params;
+
   return (
     <ContenedorParaLaSolicitud>
       <TarjetaParaLogoEtec />
