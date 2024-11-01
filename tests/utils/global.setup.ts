@@ -53,7 +53,7 @@ const registrarUnUsuario = async () => {
       where: { serie: "1" },
     });
     await db.solicitudes.create({
-      data: { solicitanteId: pame.id, estado: "activo" },
+      data: {id:"asd", solicitanteId: pame.id, estado: "activo" },
     });
     const solicitud = await db.solicitudes.findFirstOrThrow({
       where: { estado: "activo" },
