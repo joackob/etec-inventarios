@@ -3,14 +3,126 @@ import bcrypt from "bcrypt";
 import limpiarBaseDeDatos from "./global.teardown";
 
 export const inicializarBaseDeDatos = async () => {
-  await registrarUnUsuario();
+  await registrarUnUsuarios();
+  await registrarUbicaciones();
+  await registrarItems();
+  await registrarSolicitudes();
+  await registrarItemsEnSolicitud();
   return limpiarBaseDeDatos;
 };
 
-const registrarUnUsuario = async () => {
+const registrarUbicaciones = async () => {
+  try {
+    await db.ubicaciones.create({
+      data: {
+        id: "aula212",
+        tipo: "Entorno",
+        piso: "1",
+        peine: "2",
+        nombre: "212",
+      },
+    });
+    await db.ubicaciones.create({
+      data: {
+        id: "aula213",
+        tipo: "Entorno",
+        piso: "1",
+        peine: "2",
+        nombre: "213",
+      },
+    });
+    await db.ubicaciones.create({
+      data: {
+        id: "aula214",
+        tipo: "Entorno",
+        piso: "1",
+        peine: "2",
+        nombre: "214",
+      },
+    });
+    await db.ubicaciones.create({
+      data: {
+        id: "aula215",
+        tipo: "Entorno",
+        piso: "1",
+        peine: "2",
+        nombre: "215",
+      },
+    });
+  } catch (error) {
+    console.log("no se pudo registrar la ubicacion");
+  }
+};
+
+const registrarItems = async () => {
+  try {
+    await db.items.create({
+      data: {
+        id: "destornillador-plano",
+        ubicacionId: "aula212",
+        descripcion: "destornillador plano",
+        marca: "Black and Decker",
+        serie: "1",
+        unidad: "1",
+      },
+    });
+    await db.items.create({
+      data: {
+        id: "destornillador-philips",
+        ubicacionId: "aula212",
+        descripcion: "destornillador philips",
+        marca: "Black and Decker",
+        serie: "2",
+        unidad: "1",
+      },
+    });
+    await db.items.create({
+      data: {
+        id: "martillo",
+        ubicacionId: "aula212",
+        descripcion: "martillo",
+        marca: "Black and Decker",
+        serie: "3",
+        unidad: "1",
+      },
+    });
+  } catch (error) {
+    console.log(`no se pudo registrar el item: ${error}`);
+  }
+};
+
+const registrarSolicitudes = async () => {
+  try {
+    await db.solicitudes.create({
+      data: {
+        id: "asd",
+        solicitanteId: "pame",
+        estado: "activo",
+      },
+    });
+  } catch (error) {
+    console.log("no se pudo registrar la solicitud");
+  }
+};
+
+const registrarItemsEnSolicitud = async () => {
+  try {
+    await db.itemsEnSolicitud.create({
+      data: {
+        itemId: "destornillador-plano",
+        cantidad: 1,
+        solicitudId: "asd",
+      },
+    });
+  } catch (error) {
+    console.log("no se pudo registrar el item en la solicitud");
+  }
+};
+const registrarUnUsuarios = async () => {
   try {
     await db.usuarios.create({
       data: {
+        id: "docente",
         email: "docente@etec.uba.ar",
         password: await bcrypt.hash("passtesting", 10),
         nombre: "Docente",
@@ -19,50 +131,11 @@ const registrarUnUsuario = async () => {
     });
     await db.usuarios.create({
       data: {
+        id: "pame",
         email: "pgionco@etec.uba.ar",
         password: await bcrypt.hash("passtesting", 10),
         nombre: "Pamela",
         apellido: "Gionco",
-      },
-    });
-
-    const pame = await db.usuarios.findUniqueOrThrow({
-      where: { email: "pgionco@etec.uba.ar" },
-    });
-    await db.ubicaciones.create({
-      data: {
-        tipo: "Entorno",
-        piso: "1",
-        peine: "2",
-        nombre: "212",
-      },
-    });
-    const aula212 = await db.ubicaciones.findUniqueOrThrow({
-      where: { nombre: "212" },
-    });
-    await db.items.create({
-      data: {
-        ubicacionId: aula212.id,
-        descripcion: "destornillador plano",
-        marca: "Black and Decker",
-        serie: "1",
-        unidad: "1",
-      },
-    });
-    const destornillador = await db.items.findUniqueOrThrow({
-      where: { serie: "1" },
-    });
-    await db.solicitudes.create({
-      data: {id:"asd", solicitanteId: pame.id, estado: "activo" },
-    });
-    const solicitud = await db.solicitudes.findFirstOrThrow({
-      where: { estado: "activo" },
-    });
-    await db.itemsEnSolicitud.create({
-      data: {
-        itemId: destornillador.id,
-        cantidad: 1,
-        solicitudId: solicitud.id,
       },
     });
   } catch (error) {

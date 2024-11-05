@@ -22,26 +22,6 @@ model Usuarios {
   solicitudes Solicitudes[]
 }
 
-model Solicitudes {
-  id            String             @id @default(uuid())
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
-  items         ItemsEnSolicitud[]
-  solicitante   Usuarios           @relation(fields: [solicitanteId], references: [id])
-  solicitanteId String
-  estado        String // enum[pendiente, activo, cerrado]
-}
-
-model ItemsEnSolicitud {
-  solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
-  solicitudId String
-  item        Items       @relation(fields: [itemId], references: [id])
-  itemId      String
-  cantidad    Int
-
-  @@id([solicitudId, itemId])
-}
-
 model Items {
   id              String             @id @default(uuid())
   createdAt       DateTime           @default(now())
@@ -66,4 +46,24 @@ model Ubicaciones {
   estanteria String? // enum[ estanteria 1, estanteria 2, ..., estanteria 10] solo para depositos
   almacen    String? // enum[almacen 1, almacen 2, ..., almacen 10] solo para depositos
   items      Items[]
+}
+
+model Solicitudes {
+  id            String             @id @default(uuid())
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  items         ItemsEnSolicitud[]
+  solicitante   Usuarios           @relation(fields: [solicitanteId], references: [id])
+  solicitanteId String
+  estado        String // enum[pendiente, activo, cerrado]
+}
+
+model ItemsEnSolicitud {
+  solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
+  solicitudId String
+  item        Items       @relation(fields: [itemId], references: [id])
+  itemId      String
+  cantidad    Int
+
+  @@id([solicitudId, itemId])
 }

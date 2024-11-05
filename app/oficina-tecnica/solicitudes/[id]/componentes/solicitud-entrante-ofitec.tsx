@@ -4,9 +4,9 @@ import Typography from "@mui/material/Typography";
 import { Stack } from "@mui/material";
 
 export default function SolicitudEntrante({
-  descripcion,
+  solicitante,
 }: {
-  descripcion: string;
+  solicitante: string;
 }) {
   return (
     <Stack
@@ -25,7 +25,12 @@ export default function SolicitudEntrante({
             fontWeight: 600,
           }}
         >
-          PG
+          {solicitante
+            .split(" ")
+            .map((nombreOApellido) => nombreOApellido[0])
+            .join("")
+            .toUpperCase()
+            .slice(0, 2)}
         </Typography>
       </Avatar>
       <Box>
@@ -49,9 +54,9 @@ export default function SolicitudEntrante({
             fontSize: "14px",
             fontWeight: 400,
           }}
-        >
-          Pamela Gionco hizo un pedido y fue aprobado por Jose Albornoz
-        </Typography>
+        >{`
+          ${solicitante} hizo un pedido y fue aprobado por Jose Albornoz
+        `}</Typography>
       </Box>
     </Stack>
   );

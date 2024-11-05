@@ -5,6 +5,7 @@ import TarjetaParaEquipoSolicitados from "./componentes/tarjeta-para-equipo-soli
 import TarjetaParaEquipoSinExistencias from "./componentes/tarjeta-para-equipo-sin-existencias";
 import TarjetaParaLogoEtec from "./componentes/tarjeta-logoetec";
 import ContenedorParaLaSolicitud from "./componentes/contenedor-para-la-solicitud";
+import { obtenerSolicitud } from "./repositorio";
 
 export default async function Page({
   params,
@@ -12,28 +13,17 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-
-  const solicitud = await db.solicitudes.findUniqueOrThrow({
-    where: { id: id },
-    select: {
-      solicitante: { select: { nombre: true } },
-      items: {
-        select: { item: { select: { descripcion: true } }, cantidad: true },
-      },
-    },
-  });
+  const solicitud = await obtenerSolicitud(id);
 
   return (
     <ContenedorParaLaSolicitud>
       <TarjetaParaLogoEtec />
-      {/* necesito el nombre del solicitante */}
-      <SolicitudEntrante descripcion={solicitud.solicitante.nombre} />
-
+      <SolicitudEntrante solicitante={solicitud.solicitante} />
       <TarjetaParaEquipoSolicitados
         items={solicitud.items.map((item) => {
           return {
-            descripcion: item.item.descripcion,
-            unidades: item.cantidad,
+            descripcion: item.descripcion,
+            unidades: item.unidades,
           };
         })}
       />

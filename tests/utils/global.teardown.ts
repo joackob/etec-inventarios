@@ -1,11 +1,11 @@
 import db from "@/db";
 
 export const limpiarBaseDeDatos = async () => {
-  await eliminarTodosLosUsuarios();
+  await eliminarLosItemsEnSolicitud();
   await eliminarTodasLasSolicitudes();
   await eliminarTodosLosItems();
   await eliminarTodasLasUbicaciones();
-  await eliminarLosItemsEnSolicitud();
+  await eliminarTodosLosUsuarios();
 };
 
 const eliminarTodosLosUsuarios = async () => {
@@ -45,6 +45,5 @@ const eliminarLosItemsEnSolicitud = async () => {
     console.log("no se pudieron eliminar las ubicaciones");
   }
 };
-
 
 export default limpiarBaseDeDatos;

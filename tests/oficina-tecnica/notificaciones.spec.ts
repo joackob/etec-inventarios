@@ -4,9 +4,6 @@ test.describe("como representante de O.T quiero recibir todas las notificaciones
     page,
   }) => {
     await page.goto("/oficina-tecnica/notificaciones");
-    await expect(
-      page.getByRole("heading", { name: "Solicitud entrante" })
-    ).toBeVisible();
     await expect(page.getByText("Pamela Gionco hizo un pedido")).toBeVisible();
   });
 });

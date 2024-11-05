@@ -8,7 +8,7 @@
     "start": "next start",
     "tests:e2e": "bun run build && bunx playwright test",
     "tests:e2e:without-build": "bunx playwright test",
-    "tests": "bunx playwright test",
+    "tests": "bun test **/*.test.ts",
     "create:test:e2e": "bunx playwright codegen",
     "lint": "next lint",
     "init": "bunx prisma migrate dev --name init",
