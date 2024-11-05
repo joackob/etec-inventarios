@@ -11,7 +11,7 @@ test.describe("Como usuario, deseo ingresar al sistema mediante mi usuario y con
     await page.getByPlaceholder("Contraseña").fill("contrasena");
     await page.getByRole("button", { name: "continuar" }).click();
     await expect(
-      page.getByText("El email o la contraseña ingresada no son correctos"),
+      page.getByText("El email o la contraseña ingresada no son correctos")
     ).toBeVisible();
   });
 });

@@ -101,6 +101,13 @@ const registrarSolicitudes = async () => {
         estado: "activo",
       },
     });
+    await db.solicitudes.create({
+      data: {
+        id: "as",
+        solicitanteId: "Fede",
+        estado: "cerrado",
+      },
+    });
   } catch (error) {
     console.log("no se pudo registrar la solicitud");
   }
@@ -113,6 +120,13 @@ const registrarItemsEnSolicitud = async () => {
         itemId: "destornillador-plano",
         cantidad: 1,
         solicitudId: "asd",
+      },
+    });
+    await db.itemsEnSolicitud.create({
+      data: {
+        itemId: "martillo",
+        cantidad: 1,
+        solicitudId: "as",
       },
     });
   } catch (error) {
@@ -137,6 +151,15 @@ const registrarUnUsuarios = async () => {
         password: await bcrypt.hash("passtesting", 10),
         nombre: "Pamela",
         apellido: "Gionco",
+      },
+    });
+    await db.usuarios.create({
+      data: {
+        id: "Fede",
+        email: "fvillace@etec.uba.ar",
+        password: await bcrypt.hash("passtesting", 10),
+        nombre: "Federico",
+        apellido: "Villace",
       },
     });
   } catch (error) {
