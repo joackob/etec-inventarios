@@ -8,6 +8,7 @@ export const inicializarBaseDeDatos = async () => {
   await registrarItems();
   await registrarSolicitudes();
   await registrarItemsEnSolicitud();
+  await registrarItemAComprar();
   return limpiarBaseDeDatos;
 };
 
@@ -163,6 +164,19 @@ const registrarUnUsuarios = async () => {
     });
   } catch (error) {
     console.log("no se pudo registrar el usuario");
+  }
+};
+
+const registrarItemAComprar = async () => {
+  try {
+    await db.items.create({
+      data: {
+        nombreItem: "cerrucho",
+        cantidad: 1,
+      },
+    });
+  } catch (error) {
+    console.log("no se pudo registrar la solicitud");
   }
 };
 

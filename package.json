@@ -9,7 +9,7 @@
     "tests:e2e": "bun run build && bunx playwright test",
     "tests:e2e:without-build": "bunx playwright test",
     "tests": "bun test **/*.test.ts",
-    "create:test:e2e": "bunx playwright codegen",
+    "create:test:e2e": "bunx play.................. wright codegen",
     "lint": "next lint",
     "init": "bunx prisma migrate dev --name init",
     "init:npm": "npx prisma migrate dev --name init"
@@ -21,7 +21,7 @@
     "@fontsource/roboto-condensed": "^5.1.0",
     "@mui/icons-material": "^5.16.0",
     "@mui/material": "^5.16.7",
-    "@prisma/client": "5.19.1",
+    "@prisma/client": "^5.19.1",
     "@types/bcrypt": "^5.0.2",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
@@ -41,9 +41,17 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
-    "prisma": "5.19.1",
+    "prisma": "^5.19.1",
     "typescript": "^5"
   },
   "module": "index.ts",
-  "type": "module"
+  "type": "module",
+  "description": "This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

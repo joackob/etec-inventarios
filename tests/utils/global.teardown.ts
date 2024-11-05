@@ -6,6 +6,7 @@ export const limpiarBaseDeDatos = async () => {
   await eliminarTodosLosItems();
   await eliminarTodasLasUbicaciones();
   await eliminarTodosLosUsuarios();
+  await eliminarTodosLosItemsAComprar();
 };
 
 const eliminarTodosLosUsuarios = async () => {
@@ -43,6 +44,14 @@ const eliminarLosItemsEnSolicitud = async () => {
     await db.itemsEnSolicitud.deleteMany();
   } catch (error) {
     console.log("no se pudieron eliminar las ubicaciones");
+  }
+};
+
+const eliminarTodosLosItemsAComprar = async () => {
+  try {
+    await db.itemsAComprar.deleteMany();
+  } catch (error) {
+    console.log("no se pudieron eliminar los items");
   }
 };
 
