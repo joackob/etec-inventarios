@@ -8,7 +8,7 @@ export const inicializarBaseDeDatos = async () => {
   await registrarItems();
   await registrarSolicitudes();
   await registrarItemsEnSolicitud();
-  await registrarItemAComprar();
+  /*await registrarItemAComprar();*/
   return limpiarBaseDeDatos;
 };
 
@@ -144,9 +144,9 @@ const registrarUnUsuarios = async () => {
   }
 };
 
-const registrarItemAComprar = async () => {
+/*const registrarItemAComprar = async () => {
   try {
-    await db.items.create({
+    await db.itemsAComprar.create({
       data: {
         nombreItem: "cerrucho",
         cantidad: 1,
@@ -155,6 +155,6 @@ const registrarItemAComprar = async () => {
   } catch (error) {
     console.log("no se pudo registrar la solicitud");
   }
-};
+};*/
 
 export default inicializarBaseDeDatos;

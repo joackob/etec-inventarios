@@ -53,6 +53,7 @@ model Solicitudes {
   createdAt     DateTime           @default(now())
   updatedAt     DateTime           @updatedAt
   items         ItemsEnSolicitud[]
+  itemsAComprar ItemsAComprar[]
   solicitante   Usuarios           @relation(fields: [solicitanteId], references: [id])
   solicitanteId String
   estado        String // enum[pendiente, activo, cerrado]
@@ -69,6 +70,9 @@ model ItemsEnSolicitud {
 }
 
 model ItemsAComprar {
+   id            String             @id @default(uuid())
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
   solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
   solicitudId String
   cantidad    Int
