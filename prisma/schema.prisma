@@ -67,3 +67,10 @@ model ItemsEnSolicitud {
 
   @@id([solicitudId, itemId])
 }
+
+model ItemsAComprar {
+  solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
+  solicitudId String
+  cantidad    Int
+  nombreItem  String
+}

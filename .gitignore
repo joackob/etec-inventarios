@@ -50,3 +50,6 @@ bun.lockb
 # database sqlite
 db
 test.db
+node_modules/
+/blob-report/
+/playwright/.cache/
