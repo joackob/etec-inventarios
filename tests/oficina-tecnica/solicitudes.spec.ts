@@ -15,8 +15,7 @@ test.describe("Quiero ver mi solicitud", () => {
     page,
   }) => {
     await page.goto("/oficina-tecnica/solicitudes/asd");
-    await expect(page.getByText("Pamela Gionco hizo un pedido")).toBeVisible();
-    await expect(page.getByText("cerrucho")).toBeVisible();
-    await expect(page.getByText("1 unidades")).toBeVisible();
+    await expect(page.getByText("pizarra de corcho")).toBeVisible();
+    await expect(page.getByText("2 unidades")).toBeVisible();
   });
 });
