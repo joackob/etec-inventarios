@@ -28,10 +28,11 @@ model Items {
   updatedAt       DateTime           @updatedAt
   descripcion     String
   marca           String
-  serie           String             @unique
+  serie           String
   ubicacion       Ubicaciones        @relation(fields: [ubicacionId], references: [id])
   ubicacionId     String
   unidad          String
+  cantidadTotal   Int                @default(0)
   ItemsEnSolcitud ItemsEnSolicitud[]
 }
 
@@ -70,9 +71,9 @@ model ItemsEnSolicitud {
 }
 
 model ItemsAComprar {
-   id            String             @id @default(uuid())
-  createdAt     DateTime           @default(now())
-  updatedAt     DateTime           @updatedAt
+  id          String      @id @default(uuid())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   solicitud   Solicitudes @relation(fields: [solicitudId], references: [id])
   solicitudId String
   cantidad    Int
