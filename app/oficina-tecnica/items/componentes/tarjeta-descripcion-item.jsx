@@ -3,10 +3,8 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { Paper, Stack } from "@mui/material";
 
-
 export default function TarjetaParaDescripcionItem() {
   return (
-
     <Paper>
       <Stack
         marginBottom={"20px"}
@@ -18,7 +16,6 @@ export default function TarjetaParaDescripcionItem() {
         alignItems={"center"}
       >
         <Box>
-          
           <Typography
             gutterBottom
             component="h5"
@@ -39,7 +36,7 @@ export default function TarjetaParaDescripcionItem() {
                 fontWeight: 400,
               }}
             >
-              2 unidades
+              10 unidades disponibles - 4 en uso
             </Typography>
           </Typography>
         </Box>

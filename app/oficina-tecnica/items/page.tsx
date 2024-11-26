@@ -1,13 +1,14 @@
 import * as React from "react";
 import db from "@/db";
-import TarjetaParaLogoEtec from "./componentes/tarjeta-logoetec";
-
+import TarjetaParaUnLogoEtec from "./componentes/tarjeta-logoetec";
+import TarjetaParaDescripcionItem from "./componentes/tarjeta-descripcion-item";
+//import ContenedorParaItems from "./componentes/contenedor-tarjetas-item";
 
 export default async function Page({}) {
-    return(
-        <TarjetaParaLogoEtec/>
-
-    )
-  }
-
-  
+  return (
+    <>
+      <TarjetaParaUnLogoEtec />
+      <TarjetaParaDescripcionItem />
+    </>
+  );
+}
